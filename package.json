@@ -1,24 +1,40 @@
 {
-  "name": "luonutt",
-  "private": true,
+  "name": "widget",
+  "version": "0.0.0",
+  "description": "> TODO: description",
+  "author": "Arnav K <arnavkaushal09@gmail.com>",
+  "homepage": "https://github.com/ArnavK-09/luonutt#readme",
+  "license": "MIY",
+  "source": "lib/main.ts",
+  "main": "dist/main.js",
+  "outputFormat": "commonjs",
+  "target": "browser",
   "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
+    "lint": "eslint lib",
+    "check": "tsc --noEmit",
+    "start": "tsc lib/main.ts --watch",
+    "test": "node ./__tests__/WIDGET.test.js",
+    "build": "tsc lib/main.ts"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "__tests__"
+  },
+  "files": [
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ArnavK-09/luonutt.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ArnavK-09/luonutt/issues"
   },
   "devDependencies": {
-    "@repo/eslint-config": "*",
-    "@repo/typescript-config": "*",
-    "prettier": "^3.1.1",
-    "turbo": "latest"
-  },
-  "engines": {
-    "node": ">=18"
-  },
-  "packageManager": "npm@10.2.4",
-  "workspaces": [
-    "apps/*",
-    "packages/*"
-  ]
+    "@typescript-eslint/eslint-plugin": "^6.21.0",
+    "@typescript-eslint/parser": "^6.21.0",
+    "eslint": "^8.56.0",
+    "tsup": "^8.0.2",
+    "typescript": "^5.3.3"
+  }
 }
