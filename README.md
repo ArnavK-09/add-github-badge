@@ -20,11 +20,7 @@ To include the `addGithubBadge` library in your website, add the following scrip
 ###### your website root html
 
 ```html
-<script
-  src="https://cdn.jsdelivr.net/gh/ArnavK-09/add-github-badge@main/dist/main.js"
-  async
-  defer
-></script>
+<script src="https://cdn.jsdelivr.net/gh/ArnavK-09/add-github-badge@main/dist/main.js"></script>
 ```
 
 - **🍻 CDN URL:- https://cdn.jsdelivr.net/gh/ArnavK-09/add-github-badge@main/dist/main.js**
