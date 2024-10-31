@@ -1,6 +1,6 @@
 <div align="center">
     <img src="https://github.com/github.png" width="130" height="130" style="display: block; margin: 0 auto;"/>
-    <h1>Add Github Badge</h1>
+    <h1>🦡 Add Github Badge 🦡</h1>
     <p><code>addGithubBadge</code> is a simple yet powerful JavaScript library designed to effortlessly add a GitHub badge to any website. With just a script import and a few initialization options, you can display a beautiful badge that showcases your GitHub profile information, enhancing your site's interactivity and providing visitors with quick access to your GitHub profile.</p>
 </div>
 
@@ -17,11 +17,17 @@
 
 To include the `addGithubBadge` library in your website, add the following script tag in your HTML:
 
-###### your website root .html
+###### your website root html
 
 ```html
-<script src="{CDN_URL}/addGithubBadge.js"></script>
+<script
+  src="https://cdn.jsdelivr.net/gh/ArnavK-09/add-github-badge@main/dist/main.js"
+  async
+  defer
+></script>
 ```
+
+- **🍻 CDN URL:- https://cdn.jsdelivr.net/gh/ArnavK-09/add-github-badge@main/dist/main.js**
 
 ## 🚀 Usage
 

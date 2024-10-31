@@ -176,9 +176,9 @@ const __addGithubBadge_Styles = () => {
     width: 16rem;
     overflow-wrap: break-word;
     border-radius: 0.7rem 0.7rem 0 0;
-    margin-left: 0.2rem;
     background-color: #000000;
     position: fixed;
+    left: 0.9rem;
     bottom: 0rem;
     z-index: 60;
     color: white;
@@ -438,29 +438,24 @@ async function addGithubBadge(props: addGithubBadgeInitProps | string) {
   UTILS.log(`Appended addGithubBadge_STYLES to document body!`);
 
   // creating trigger
-  const addGithubBadge_TRIGGER_BTN = document.createElement("div");
   const addGithubBadge_TRIGGER_BTN_TXT = props.trigger_options?.text
     ? props.trigger_options?.text
         .replace("{{username}}", props.github_username)
         .trim()
     : `Made by @${props.github_username}`;
-  addGithubBadge_TRIGGER_BTN.innerHTML = __addGithubBadge_PopupTriggerBtn(
+  document.documentElement.innerHTML += __addGithubBadge_PopupTriggerBtn(
     addGithubBadge_TRIGGER_BTN_TXT,
     addGithubBadge_GH_USER.login,
   );
-  document.body.appendChild(addGithubBadge_TRIGGER_BTN);
   UTILS.log(
     `Appended addGithubBadge_TRIGGER_BTN to document body with content :- ${addGithubBadge_TRIGGER_BTN_TXT}`,
   );
 
   // appending popup
-  const addGithubBadge_POPUP = document.createElement("div");
-  addGithubBadge_POPUP.innerHTML = __addGithubBadge_Popup(
+  document.documentElement.innerHTML += __addGithubBadge_Popup(
     addGithubBadge_GH_USER,
     props,
   );
-  addGithubBadge_POPUP.style.fontFamily = `Lucida Console", "Courier New", monospace`;
-  document.body.appendChild(addGithubBadge_POPUP);
   UTILS.log(`Appended addGithubBadge_POPUP to document body!`);
 
   // Handlers
@@ -470,10 +465,9 @@ async function addGithubBadge(props: addGithubBadgeInitProps | string) {
       ?.classList.toggle("__addGithubBadge_popup_open");
 
   // configuring handlers
-  addGithubBadge_TRIGGER_BTN.addEventListener(
-    "click",
-    addGithubBadgePopupHandler,
-  );
+  document
+    .getElementById("__addGithubBadge_popup_trigger_btn")
+    .addEventListener("click", addGithubBadgePopupHandler);
   document
     .getElementById("__addGithubBadge_cross_btn")
     ?.addEventListener("click", addGithubBadgePopupHandler);
