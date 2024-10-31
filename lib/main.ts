@@ -55,7 +55,7 @@ const __addGithubBadge_widgetPopupOverview = (
        draggable="false"
      />
      <p>
-       This project is made by
+       This project was created by
      </p>
      <h3>
       ${custom_name ? custom_name : `@${username}`}
