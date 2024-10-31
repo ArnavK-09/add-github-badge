@@ -1,0 +1,37 @@
+name: Build and Push
+
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18 
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build project
+        run: npm run build
+        
+      - name: Form project
+        run: npm run fmt
+        
+      - name: Commit and push changes
+        run: |
+          git config --global user.name "ArnavK-09"
+          git config --global user.email "arnavkaushal09@gmail.com"
+          git add . 
+          git commit -m "Build & Format"
+          git push
