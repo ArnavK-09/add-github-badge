@@ -176,7 +176,7 @@ const __addGithubBadge_Styles = () => {
     width: 16rem;
     overflow-wrap: break-word;
     border-radius: 0.7rem 0.7rem 0 0;
-    background-color: #000000;
+    background-color: #0d1117;
     position: fixed;
     left: 0.9rem;
     bottom: 0rem;
@@ -211,7 +211,7 @@ const __addGithubBadge_Styles = () => {
     left: 1rem;
     border-radius: 10px 10px 0 0;
     color: #ffffff;
-    background-color: #000000;
+    background-color: #0d1117;
     cursor: pointer;
     user-select: none;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
