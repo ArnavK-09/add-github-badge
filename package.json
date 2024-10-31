@@ -1,6 +1,6 @@
 {
-  "name": "widget",
-  "version": "0.0.0",
+  "name": "github-badge",
+  "version": "0.0.1",
   "description": "> TODO: description",
   "author": "Arnav K <arnavkaushal09@gmail.com>",
   "homepage": "https://github.com/ArnavK-09/luonutt#readme",
@@ -10,11 +10,10 @@
   "outputFormat": "commonjs",
   "target": "browser",
   "scripts": {
-    "lint": "eslint lib",
     "check": "tsc --noEmit",
     "start": "tsc lib/main.ts --watch",
-    "test": "node ./__tests__/WIDGET.test.js",
-    "build": "tsc lib/main.ts"
+    "build": "tsc lib/main.ts --outDir dist",
+    "fmt": "npx prettier -w ."
   },
   "directories": {
     "lib": "lib",
@@ -33,8 +32,27 @@
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
-    "eslint": "^8.56.0",
+    "prettier": "^3.3.3",
     "tsup": "^8.0.2",
     "typescript": "^5.3.3"
+  },
+  "tsup": {
+    "entry": [
+      "src/main.ts"
+    ],
+    "format": [
+      "iife"
+    ],
+    "minify": true,
+    "outDir": "dist",
+    "clean": true,
+    "legacyOutput": true,
+    "sourcemap": false,
+    "treeshake": true,
+    "splitting": false,
+    "ignoreWatch": [
+      "/node_modules/"
+    ],
+    "dts": false
   }
 }

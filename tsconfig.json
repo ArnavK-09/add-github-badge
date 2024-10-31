@@ -1,6 +1,6 @@
 {
-    "compilerOptions": {
-        "isolatedModules": true,
-        "outDir": "dist"
-    }
+  "compilerOptions": {
+    "isolatedModules": true,
+    "outDir": "dist"
+  }
 }

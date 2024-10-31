@@ -1,48 +1,34 @@
 /**
- * 
- * LUONUTT DEFAULTS
- */
-const __LUONUTT_DEFAULTS = {
-  USERNAME: "ArnavK-09",
-  AVATAR: "https://avatars.githubusercontent.com/u/69188140?v=4",
-  BIO: "lorem ipsum",
-  DEMO_IMG:
-    "https://images.unsplash.com/photo-1524758631624-e2822e304c36?ixlib=rb-1.2.1&ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2070&q=80",
-};
-
-
-
-/**
  *
  * ALL ICONS
  *
  */
-const __LUONUTT_ICONS = {
+const __addGithubBadge_ICONS = {
   url: `<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" d="M13.19 8.688a4.5 4.5 0 0 1 1.242 7.244l-4.5 4.5a4.5 4.5 0 0 1-6.364-6.364l1.757-1.757m13.35-.622 1.757-1.757a4.5 4.5 0 0 0-6.364-6.364l-4.5 4.5a4.5 4.5 0 0 0 1.242 7.244" /></svg>`,
 };
 
 /**
  *
- * ALL LUONUTT TYPES
+ * ALL addGithubBadge TYPES
  *
  */
-type widgetPopupLink = { title?: string; href: string; svg?: string };
-type widgetPopupProjectCard = { heading?: string; img: string; url: string };
-type LuonuttExtraOptions = { debug?: boolean };
-type LuonuttPopupTriggerOptions = { text?: string };
-interface LuonuttInitProps {
+type widgetPopupLink = { title?: string; href: string };
+type addGithubBadgeExtraOptions = { debug?: boolean };
+type addGithubBadgePopupTriggerOptions = { text?: string };
+interface addGithubBadgeInitProps {
   github_username: string;
   custom_name?: string;
-  trigger_options?: LuonuttPopupTriggerOptions;
-  options?: LuonuttExtraOptions;
+  trigger_options?: addGithubBadgePopupTriggerOptions;
+  options?: addGithubBadgeExtraOptions;
+  links: widgetPopupLink[];
 }
 interface GH_USER {
-  name: string | null,
-  location: string | null,
-  bio: string | null,
-  blog: string | null,
-  twitter_username: string | null,
-  login: string,
+  name: string | null;
+  location: string | null;
+  bio: string | null;
+  blog: string | null;
+  twitter_username: string | null;
+  login: string;
 }
 
 /**
@@ -50,21 +36,21 @@ interface GH_USER {
  * POPUP INTERNAL COMPONENTS
  *
  */
-const __LUONUTT_widgetPopupOverview = (
+const __addGithubBadge_widgetPopupOverview = (
   username: string,
-  avatar: string = __LUONUTT_DEFAULTS.AVATAR,
   location?: string,
+  custom_name?: string,
 ) => {
   return `
- <!-- LUONUTT POPUP PROFILE OVERVIEW START -->
- <div id="__luonutt_cross_btn">
+ <!-- addGithubBadge POPUP PROFILE OVERVIEW START -->
+ <div id="__addGithubBadge_cross_btn">
  X
  </div>
-   <div class="__luonutt_overview_upper __luonutt_select_none">
+   <div class="__addGithubBadge_overview_upper __addGithubBadge_select_none">
      <img
-       id="__luonutt_popup_img"
-       class="__luonutt_popup_avatar"
-       src="${avatar}"
+       id="__addGithubBadge_popup_img"
+       class="__addGithubBadge_popup_avatar"
+       src="https://github.com/${username}.png"
        alt="${username}"
        draggable="false"
      />
@@ -72,13 +58,13 @@ const __LUONUTT_widgetPopupOverview = (
        This project is made by
      </p>
      <h3>
-       @ArnavK-09
+      ${custom_name ? custom_name : `@${username}`}
      </h3>
    </div>
    ${
      location
        ? `
-   <div class="__luonutt_popup_txt_w_icon">
+   <div class="__addGithubBadge_popup_txt_w_icon">
    <svg
      xmlns="http://www.w3.org/2000/svg"
      fill="none"
@@ -102,134 +88,91 @@ const __LUONUTT_widgetPopupOverview = (
    `
        : ""
    }
-   <hr class="__luonutt_hr" />
+   <hr class="__addGithubBadge_hr" />
  </div>
- <!-- LUONUTT POPUP PROFILE OVERVIEW END -->
+ <!-- addGithubBadge POPUP PROFILE OVERVIEW END -->
  `;
 };
 
-const __LUONUTT_widgetPopupBio = (bio: string) => {
-  return `<!-- LUONUTT BIO START -->
-  <div class="__luonutt_bio">
-    <details class="__luonutt_popup_details" open>
+const __addGithubBadge_widgetPopupBio = (bio: string) => {
+  return `<!-- addGithubBadge BIO START -->
+  <div class="__addGithubBadge_bio">
+    <details class="__addGithubBadge_popup_details" open>
       <summary><strong>Bio:-</strong></summary>
       <p>
         ${bio}
       </p>
     </details>
   </div>
-  <!-- LUONUTT BIO END -->
+  <!-- addGithubBadge BIO END -->
   `;
 };
 
-const __LUONUTT_widgetPopupLinks = (links: Array<widgetPopupLink>) => {
-  return `<!-- LUONUTT LINKS START -->
-  <div class="__luonutt_popup_desc">
-    <details id="__luonutt_links" class="__luonutt_popup_details">
+const __addGithubBadge_widgetPopupLinks = (links: Array<widgetPopupLink>) => {
+  return `<!-- addGithubBadge LINKS START -->
+  <div class="__addGithubBadge_popup_desc">
+    <details id="__addGithubBadge_links" class="__addGithubBadge_popup_details" open>
       <summary><strong>Links:-</strong></summary>
-      <ul>
-        ${links.map((link) => `<li><span>${link.svg ?? __LUONUTT_ICONS.url}</span><a href="${link.href}" target="_blank">${link.title ?? link.href}</a></li>`)}
-      </ul>
+      <ol>
+        ${links.map((link) => `<li><span>${__addGithubBadge_ICONS.url}</span><a href="${link.href}" target="_blank">${link.title ?? link.href}</a></li>`)}
+      </ol>
     </details>
   </div>
-  <!-- LUONUTT LINKS END -->`;
-};
-
-const __LUONUTT_widgetPopupProjects = (projects: Array<widgetPopupProjectCard>) => {
-  return `
-  <!-- LUONUTT PROJECTS START -->
-  <div class="__luonutt_popup_desc">
-  <details class="__luonutt_popup_details" open>
-    <summary><strong>My Projects:-</strong></summary>
-    <div id="__luonutt_projects" class="__luonutt_noscrollbar">
-    ${projects
-      .map(
-        (project, i) =>
-          `
-      <div class="__luonutt_select_none" style="min-width: 90%;">
-        <a href="${project.url}" target="_blank" aria-label="open project #${i}">
-          <article class="__luonutt_project_card">
-            <img
-              alt="Project #${i}"
-              src="${project.img}"
-              loading="lazy"
-            />
-            <div>
-              <p>${project.heading ?? `My Project #${i}`}</p>
-            </div>
-          </article>
-        </a>
-      </div>
-      `,
-      )
-      .join("")}
-    </div>
-  </details>
-  </div>
-  <!-- LUONUTT PROJECTS END -->
-`;
+  <!-- addGithubBadge LINKS END -->`;
 };
 
 /**
  *
- * Luonutt Popup Trigger Button
+ * addGithubBadge Popup Trigger Button
  *
  */
-const __LUONUTT_PopupTriggerBtn = (text: string, av?: string) => {
+const __addGithubBadge_PopupTriggerBtn = (text: string, username: string) => {
   return `
-  <section aria-label="open-luonutt-widget" id="__luonutt_popup_trigger_btn">
-  <img src="${av ?? __LUONUTT_DEFAULTS.AVATAR}" alt="${text}" />
+  <section aria-label="open-addGithubBadge-widget" id="__addGithubBadge_popup_trigger_btn">
+  <img src="${`https://github.com/${username}.png`}" alt="${text}" />
   <p>${text}</p></section>
   `;
 };
 
 /**
  *
- * Luonutt Popup
+ * addGithubBadge Popup
  *
  */
-const __LUONUTT_Popup = (user: GH_USER) => {
+const __addGithubBadge_Popup = (
+  user: GH_USER,
+  props: addGithubBadgeInitProps,
+) => {
   return `
-  <aside class="__luonutt_noscrollbar" id="__luonutt_popup">
-  ${__LUONUTT_widgetPopupOverview(__LUONUTT_DEFAULTS.USERNAME, __LUONUTT_DEFAULTS.AVATAR, "India")}
-  ${"TODO" ? __LUONUTT_widgetPopupBio("Lorem Ipsum") : ""}
-  ${__LUONUTT_widgetPopupLinks([
-    {
-      href: "//github.com/" + __LUONUTT_DEFAULTS.USERNAME,
-      title: "Github @" + __LUONUTT_DEFAULTS.USERNAME,
-    },
-  ])}
-  ${__LUONUTT_widgetPopupProjects([
-    {
-      img: __LUONUTT_DEFAULTS.DEMO_IMG,
-      url: "github.com",
-    },
-    {
-      img: __LUONUTT_DEFAULTS.DEMO_IMG,
-      url: "github.com",
-    },
-    {
-      img: __LUONUTT_DEFAULTS.DEMO_IMG,
-      url: "github.com",
-    },
-  ])}
+  <aside class="__addGithubBadge_noscrollbar" id="__addGithubBadge_popup">
+  ${__addGithubBadge_widgetPopupOverview(user.login, user.location, props.custom_name)}
+  ${user.bio ? __addGithubBadge_widgetPopupBio(user.bio) : ""}
+  ${__addGithubBadge_widgetPopupLinks(
+    [
+      {
+        href: "//github.com/" + user.login,
+        title: "Github @" + user.login,
+      },
+      ...(props.links ?? [null]),
+    ].filter(Boolean),
+  )}
   </aside>
   `;
 };
 
 /**
  *
- * Luonutt Whole style source
+ * addGithubBadge Whole style source
  *
  */
-const __LUONUTT_Styles = () => {
+const __addGithubBadge_Styles = () => {
   return `
   /* Popup styles */
-  #__luonutt_popup {
+  #__addGithubBadge_popup {
+    font-family: "Lucida Console", "Courier New", monospace;
     box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
     overflow-x: hidden;
     padding: 1rem;
-    height: 32rem;
     width: 16rem;
     overflow-wrap: break-word;
     border-radius: 0.7rem 0.7rem 0 0;
@@ -244,13 +187,13 @@ const __LUONUTT_Styles = () => {
     transition: 0.4s;
   }
   
-  .__luonutt_popup_open {
+  .__addGithubBadge_popup_open {
     transition: 0.4s !important;
     transition-timing-function: ease-out !important;
     transform: translateY(0) !important;
   }
   
-  #__luonutt_cross_btn {
+  #__addGithubBadge_cross_btn {
     cursor: pointer;
     margin-top: -0.25rem;
     font-weight: 700;
@@ -258,7 +201,8 @@ const __LUONUTT_Styles = () => {
   }
   
   /* Popup trigger btn */
-  #__luonutt_popup_trigger_btn {
+  #__addGithubBadge_popup_trigger_btn {
+    font-family: "Lucida Console", "Courier New", monospace;
     display: inline-flex;
     position: fixed;
     bottom: 0rem;
@@ -290,13 +234,13 @@ const __LUONUTT_Styles = () => {
     }
   }
   
-  #__luonutt_popup_trigger_btn:hover {
+  #__addGithubBadge_popup_trigger_btn:hover {
     border-bottom-right-radius: 0.2rem;
     border-bottom-left-radius: 0.2rem;
   }
   
   
-  .__luonutt_popup_details > summary {
+  .__addGithubBadge_popup_details > summary {
     cursor: pointer;
     user-select: none;
     font-size: 0.975rem;
@@ -309,12 +253,12 @@ const __LUONUTT_Styles = () => {
     text-underline-offset: 4px;
   }
   
-  .__luonutt_popup_desc {
+  .__addGithubBadge_popup_desc {
     margin-top: 0.5rem;
     margin-bottom: 0.5rem;
   }
   
-  .__luonutt_popup_avatar {
+  .__addGithubBadge_popup_avatar {
     margin-bottom: 0.3rem;
     aspect-ratio: 1 / 1;
     border-radius: 9999px;
@@ -322,12 +266,13 @@ const __LUONUTT_Styles = () => {
     margin-right: 0.5rem;
   }
   
-  .__luonutt_popup_txt_w_icon {
+  .__addGithubBadge_popup_txt_w_icon {
     opacity: 0.8;
     display: flex;
     justify-content: center;
     margin-bottom: 0.8em;
     align-items: center;
+    font-size: 0.75rem;
     height: fit-content;
     text-align: center;
     vertical-align: middle;
@@ -338,11 +283,11 @@ const __LUONUTT_Styles = () => {
     }
   }
   
-  .__luonutt_bio {
+  .__addGithubBadge_bio {
     margin-top: 0.5rem;
   }
   
-  .__luonutt_bio > details > p {
+  .__addGithubBadge_bio > details > p {
     user-select: none;
     font-size: 0.875rem;
     line-height: 1.25rem;
@@ -354,7 +299,7 @@ const __LUONUTT_Styles = () => {
     text-decoration: none;
   }
   
-  #__luonutt_links {
+  #__addGithubBadge_links {
     ul {
       user-select: none;
       width: 100%;
@@ -383,7 +328,7 @@ const __LUONUTT_Styles = () => {
     }
   }
   
-  #__luonutt_projects {
+  #__addGithubBadge_projects {
     border-radius: 0.6rem;
     margin-right: -0.67rem;
     margin-top: 0.67rem;
@@ -394,51 +339,13 @@ const __LUONUTT_Styles = () => {
     height: fit-content;
   }
   
-  .__luonutt_project_card {
-    transform: scale(0.9);
-    cursor: pointer;
-    transition-property: transform;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    transition-duration: 300ms;
-    transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
-    img {
-      object-fit: cover;
-      width: 100%;
-      height: auto;
-      aspect-ratio: 16 / 9;
-      border-top-left-radius: 0.75rem;
-      border-top-right-radius: 0.75rem;
-    }
-    div {
-      padding: 0.6rem;
-      background-color: #0d0d0d;
-      overflow-wrap: break-word;
-      border-bottom-right-radius: 0.75rem;
-      border-bottom-left-radius: 0.75rem;
-    }
-    p {
-      margin-top: 0.1rem;
-      font-size: 0.8rem;
-      line-height: 0.89rem;
-      color: #fff;
-      opacity: 0.98;
-    }
-  }
-
-  #__luonutt_popup_img {
+  #__addGithubBadge_popup_img {
     height: 7em;
     width: auto;
     aspect-rato: 1 / 1;
   }
   
-  .__luonutt_project_card:hover {
-    transform: scale(0.95);
-    box-shadow:
-      0 20px 25px -5px rgba(0, 0, 0, 0.1),
-      0 10px 10px -5px rgba(0, 0, 0, 0.04);
-  }
-  
-  .__luonutt_overview_upper {
+  .__addGithubBadge_overview_upper {
     padding-bottom: 0.3rem;
     display: grid;
     place-items: center;
@@ -459,25 +366,25 @@ const __LUONUTT_Styles = () => {
   }
   
   /* Hide scrollbar for Chrome, Safari and Opera */
-  .__luonutt_noscrollbar::-webkit-scrollbar {
+  .__addGithubBadge_noscrollbar::-webkit-scrollbar {
     display: none;
   }
   
   /* Hide scrollbar for IE, Edge and Firefox */
-  .__luonutt_noscrollbar {
+  .__addGithubBadge_noscrollbar {
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */
   }
   
-  /* Misc luonutt */
-  .__luonutt_hr {
+  /* Misc addGithubBadge */
+  .__addGithubBadge_hr {
     margin-top: 0.3rem;
     border-width: 0;
     height: 1px;
     background-color: #e5e7eb;
     opacity: 0.3;
   }
-  .__luonutt_select_none {
+  .__addGithubBadge_select_none {
     user-select: none;
   }  
   `;
@@ -485,78 +392,90 @@ const __LUONUTT_Styles = () => {
 
 /**
  *
- * Luonutt initialization function, to be called by consumer on html side
+ * addGithubBadge initialization function, to be called by consumer on html side
  *
  */
-async function initLuoNutt(props: LuonuttInitProps | string) {
+async function addGithubBadge(props: addGithubBadgeInitProps | string) {
   // if no props
   if (!props)
-    throw new Error(`[LUONUTT] Luonutt initialized without any props.`);
+    throw new Error(
+      `[addGithubBadge] addGithubBadge initialized without any props.`,
+    );
 
   // providing functionality even if only username provided
   if (typeof props == "string") {
     props = {
       github_username: props.toString().trim(),
-    } as LuonuttInitProps;
+    } as addGithubBadgeInitProps;
   }
 
   // extra utils function
   const UTILS = {
     log(...anything) {
-      if ((props as LuonuttInitProps).options?.debug !== false) {
-        console.log(`[LUONUTT] ${anything}`);
+      if ((props as addGithubBadgeInitProps).options?.debug == true) {
+        console.log(`[addGithubBadge]`, ...anything);
       }
     },
   };
 
   // check user name
-  UTILS.log("Luonutt widget initialized")
+  UTILS.log("addGithubBadge widget initialized");
   if (!props?.github_username) return UTILS.log("No Github username provided!");
 
-  // fetching gh user 
-  const LUONUTT_GH_REQ = await fetch(`https://api.github.com/users/${props.github_username}`)
-  if(!LUONUTT_GH_REQ.ok) return UTILS.log("Failed to fetch Github User!");
-  const LUONUTT_GH_USER = await LUONUTT_GH_REQ.json();
-  console.log(12, LUONUTT_GH_USER)
-  UTILS.log("Fetched Github User")
-  
-  // appenidng style
-  const LUONUTT_STYLES = document.createElement("style");
-  LUONUTT_STYLES.innerHTML = __LUONUTT_Styles();
-  document.body.appendChild(LUONUTT_STYLES);
-  UTILS.log(`Appended LUONUTT_STYLES to document body!`);
+  // fetching gh user
+  const addGithubBadge_GH_REQ = await fetch(
+    `https://api.github.com/users/${props.github_username}`,
+  );
+  if (!addGithubBadge_GH_REQ.ok)
+    return UTILS.log("Failed to fetch Github User!");
+  const addGithubBadge_GH_USER = await addGithubBadge_GH_REQ.json();
+  UTILS.log("Fetched Github User");
+
+  // appending style
+  const addGithubBadge_STYLES = document.createElement("style");
+  addGithubBadge_STYLES.innerHTML = __addGithubBadge_Styles();
+  document.body.appendChild(addGithubBadge_STYLES);
+  UTILS.log(`Appended addGithubBadge_STYLES to document body!`);
 
   // creating trigger
-  const LUONUTT_TRIGGER_BTN = document.createElement("div");
-  const LUONUTT_TRIGGER_BTN_TXT = props.trigger_options?.text
+  const addGithubBadge_TRIGGER_BTN = document.createElement("div");
+  const addGithubBadge_TRIGGER_BTN_TXT = props.trigger_options?.text
     ? props.trigger_options?.text
         .replace("{{username}}", props.github_username)
         .trim()
     : `Made by @${props.github_username}`;
-  LUONUTT_TRIGGER_BTN.innerHTML = __LUONUTT_PopupTriggerBtn(
-    LUONUTT_TRIGGER_BTN_TXT,
+  addGithubBadge_TRIGGER_BTN.innerHTML = __addGithubBadge_PopupTriggerBtn(
+    addGithubBadge_TRIGGER_BTN_TXT,
+    addGithubBadge_GH_USER.login,
   );
-  document.body.appendChild(LUONUTT_TRIGGER_BTN);
+  document.body.appendChild(addGithubBadge_TRIGGER_BTN);
   UTILS.log(
-    `Appended LUONUTT_TRIGGER_BTN to document body with content :- ${LUONUTT_TRIGGER_BTN_TXT}`,
+    `Appended addGithubBadge_TRIGGER_BTN to document body with content :- ${addGithubBadge_TRIGGER_BTN_TXT}`,
   );
 
   // appending popup
-  const LUONUTT_POPUP = document.createElement("div");
-  LUONUTT_POPUP.innerHTML = __LUONUTT_Popup(null);
-  document.body.appendChild(LUONUTT_POPUP);
-  UTILS.log(`Appended LUONUTT_POPUP to document body!`);
+  const addGithubBadge_POPUP = document.createElement("div");
+  addGithubBadge_POPUP.innerHTML = __addGithubBadge_Popup(
+    addGithubBadge_GH_USER,
+    props,
+  );
+  addGithubBadge_POPUP.style.fontFamily = `Lucida Console", "Courier New", monospace`;
+  document.body.appendChild(addGithubBadge_POPUP);
+  UTILS.log(`Appended addGithubBadge_POPUP to document body!`);
 
   // Handlers
-  const luonuttPopupHandler = () =>
+  const addGithubBadgePopupHandler = () =>
     document
-      .getElementById("__luonutt_popup")
-      ?.classList.toggle("__luonutt_popup_open");
+      .getElementById("__addGithubBadge_popup")
+      ?.classList.toggle("__addGithubBadge_popup_open");
 
   // configuring handlers
-  LUONUTT_TRIGGER_BTN.addEventListener("click", luonuttPopupHandler);
+  addGithubBadge_TRIGGER_BTN.addEventListener(
+    "click",
+    addGithubBadgePopupHandler,
+  );
   document
-    .getElementById("__luonutt_cross_btn")
-    ?.addEventListener("click", luonuttPopupHandler);
-  UTILS.log(`Configured LUONUTT Event Handlers!`);
+    .getElementById("__addGithubBadge_cross_btn")
+    ?.addEventListener("click", addGithubBadgePopupHandler);
+  UTILS.log(`Configured addGithubBadge Event Handlers!`);
 }

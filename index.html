@@ -1,38 +1,32 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Luonutt Testing</title>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>addGithubBadge Testing</title>
     <script src="./dist/main.js"></script>
-</head>
+  </head>
 
-<body>
-    <h1>Helglo World!</h1>
-    <pre>
+  <body>
+    <h1>Hello, World!</h1>
+  </body>
 
-        .container .alert {
-            transform: translateY(130%);
-            transition-timing-function: ease-in;
-            transition: 0.2s;
-          }
-          .container.alert-is-shown .alert {
-            transition: 0.25s;
-            transition-timing-function: ease-out;
-            
-            transform: translateY(0);
-            opacity: 1;
-          }
-          
-
-    </pre>
-</body>
-
-<script>
-    initLuoNutt('ArnavK-09')
-</script>
-
-
+  <script>
+    addGithubBadge({
+      links: [
+        {
+          href: "//google.com",
+          title: "Open Google",
+        },
+      ],
+      github_username: "ArnavK-09",
+      custom_name: "Arnav Kaushal",
+      options: {
+        debug: true,
+      },
+      trigger_options: {
+        text: "{{username}} ka kaam",
+      },
+    });
+  </script>
 </html>
-
-
