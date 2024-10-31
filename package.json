@@ -1,9 +1,9 @@
 {
   "name": "github-badge",
   "version": "0.0.1",
-  "description": "> TODO: description",
+  "description": "🦡 Add a customizable GitHub badge to your website...",
   "author": "Arnav K <arnavkaushal09@gmail.com>",
-  "homepage": "https://github.com/ArnavK-09/luonutt#readme",
+  "homepage": "https://github.com/ArnavK-09/add-github-badge#readme",
   "license": "MIY",
   "source": "lib/main.ts",
   "main": "dist/main.js",
@@ -24,10 +24,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ArnavK-09/luonutt.git"
+    "url": "git+https://github.com/ArnavK-09/add-github-badge.git"
   },
   "bugs": {
-    "url": "https://github.com/ArnavK-09/luonutt/issues"
+    "url": "https://github.com/ArnavK-09/add-github-badge/issues"
   },
   "devDependencies": {
     "@typescript-eslint/eslint-plugin": "^6.21.0",
