@@ -22,11 +22,11 @@ jobs:
       - name: Install dependencies
         run: npm install
 
+      - name: Format project
+        run: npm run fmt
+
       - name: Build project
         run: npm run build
-
-      - name: Form project
-        run: npm run fmt
 
       - name: Commit and push changes
         run: |
