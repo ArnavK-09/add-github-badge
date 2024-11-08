@@ -29,9 +29,13 @@ jobs:
         run: npm run build
 
       - name: Commit and push changes
+        continue-on-error: true
         run: |
           git config --global user.name "ArnavK-09"
           git config --global user.email "arnavkaushal09@gmail.com"
           git add . 
           git commit -m "Build & Format"
           git push
+
+      - name: Continue
+        run: exit 0 
