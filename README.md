@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://github.com/github.png" width="130" height="130" style="display: block; margin: 0 auto;"/>
+    <img src="https://emoji-route.vercel.app/svg/🦡" width="130" height="130" style="display: block; margin: 0 auto;"/>
     <h1>🦡 Add Github Badge 🦡</h1>
     <p><code>addGithubBadge</code> is a simple yet powerful JavaScript library designed to effortlessly add a GitHub badge to any website. With just a script import and a few initialization options, you can display a beautiful badge that showcases your GitHub profile information, enhancing your site's interactivity and providing visitors with quick access to your GitHub profile.</p>
 </div>
